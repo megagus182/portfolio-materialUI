@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "up";
+  src: url("../fonts/1up.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "whitestone";
+  src: url("../fonts/Whitestone.otf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+    font-family: "gecko";
+    src: url("../fonts/Gecko\ Lunch.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+  }
