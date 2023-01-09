@@ -4,6 +4,7 @@ import Home from "../src/Sections/Home"
 import AboutMe from "../src/Sections/AboutMe"
 import ContactMe from "../src/Sections/ContactMe"
 import Projects from "../src/Sections/Projects"
+import NavBar from "../src/Sections/NavBar"
 import { MaterialUISwitch } from "./Switch"
 import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
@@ -52,6 +53,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <MaterialUISwitch sx={{ m: 1 }} onChange={handleChange} />
+      <NavBar />
         <Home />
         <AboutMe />
         <Projects />
