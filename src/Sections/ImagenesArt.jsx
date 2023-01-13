@@ -6,6 +6,7 @@ import Art1 from "../images/Art1.PNG";
 import Art2 from "../images/Art2.PNG";
 import Art3 from "../images/Art3.PNG";
 import Art4 from "../images/Art4.PNG";
+import artcompleta from "../images/artcompleta.png"
 
 export default function TitlebarImageList() {
   return (
@@ -48,5 +49,9 @@ const itemData = [
     rows: 2,
     cols: 2,
     featured: true,
-  }
+  },
+  {
+    img: artcompleta,
+    title: 'completa',
+  },
 ];
