@@ -20,7 +20,6 @@ export default function Projects() {
         <Typography variant="h3" margin={"20px"}>
           GameScript
         </Typography>
-
         <Imagenes />
         <br></br>
         <Typography variant="h3" margin={"20px"}>
@@ -33,7 +32,7 @@ export default function Projects() {
         </Typography>
         <ImagenesF />
 
-        <Box bg="tomato" height="auto"></Box>
+        <Box height="auto"></Box>
       </Box>
     </Paper>
   );
