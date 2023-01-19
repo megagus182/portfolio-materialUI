@@ -3,6 +3,9 @@ import { Box, Typography, Paper } from "@mui/material";
 import Imagenes from "./Imagenes";
 import ImagenesF from "./ImagenesFood";
 import ImagenesArt from "./ImagenesArt";
+import artcompleta from "../images/artcompleta.png";
+
+import "./Projects.css"
 
 export default function Projects() {
   return (
@@ -30,6 +33,10 @@ export default function Projects() {
         <Typography variant="h3" margin={"20px"}>
           FoodApp
         </Typography>
+        <Box width={"80%"} height="400px">
+          <img width={"100%"} src={artcompleta} alt="asd" className="completa" />
+        </Box>
+
         <ImagenesF />
 
         <Box height="auto"></Box>
