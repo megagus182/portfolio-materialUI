@@ -6,13 +6,12 @@ import {
   useColorModeValue,
   IconButton,
   Flex,
+  Tooltip,
+  Icon,
+  Wrap, // Importa Wrap
+  WrapItem, // Importa WrapItem
 } from "@chakra-ui/react";
-import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import React, { useState } from "react";
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { useInView } from "framer-motion";
-import Coppel from "../images/coppel.png"
+import Coppel from "../images/coppel.png";
 import Comida from "../images/Food1.PNG";
 import Comida2 from "../images/Food2.PNG";
 import Comida3 from "../images/Food3.PNG";
@@ -30,6 +29,56 @@ import juego7 from "../images/Game7.PNG";
 import juego8 from "../images/Game8.PNG";
 import juego9 from "../images/Game9.PNG";
 import juego10 from "../images/Game10.PNG";
+import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import React, { useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { useInView } from "framer-motion";
+import {
+  SiAngular,
+  SiJavascript,
+  SiReact,
+  SiSpring,
+  SiNodedotjs,
+  SiPostgresql,
+  SiGit,
+  SiPostman,
+  SiScrumalliance,
+} from 'react-icons/si';
+import { VscAzureDevops } from "react-icons/vsc";
+import { DiGitBranch, DiVisualstudio, DiMsqlServer } from "react-icons/di";
+import { TbBrandCSharp } from "react-icons/tb";
+import { BiLogoGoogle } from "react-icons/bi";
+import { DiScrum, DiMaterializecss } from "react-icons/di";
+import { SiFirebase, SiStripe, SiRedux, SiCss3, SiSequelize } from "react-icons/si";
+import { FaBootstrap } from "react-icons/fa";
+
+
+const tecnologiasIcons = {
+  'Angular': SiAngular,
+  'JavaScript': SiJavascript,
+  'Git': DiGitBranch,
+  'Visual Studio': DiVisualstudio,
+  'React': SiReact,
+  'Spring Boot': SiSpring,
+  'C#': TbBrandCSharp,
+  'SQL Server': DiMsqlServer,
+  'PostgreSQL': SiPostgresql,
+  'Azure DevOps': VscAzureDevops,
+  'Metodologia Scrum': DiScrum,
+  'Bootstrap': FaBootstrap, 
+  'Google Workspace': BiLogoGoogle,
+  'Node.js': SiNodedotjs,
+  'GIT': SiGit,
+  'Postman': SiPostman,
+  'Scrum': SiScrumalliance,
+  'Material UI': DiMaterializecss, 
+  'Firebase': SiFirebase,
+  'Stripe': SiStripe,
+  'Redux': SiRedux,
+  'CSS Puro': SiCss3,
+  'Sequelize': SiSequelize,
+};
 
 const proyectos = [
   {
@@ -41,6 +90,7 @@ const proyectos = [
       "Por temas de confidencialidad no puedo mostrar imágenes de los proyectos, pero ha sido una experiencia clave en mi crecimiento profesional."
     ],
     imagenes: [Coppel],
+    tecnologias: ['Angular', 'Node.js', 'Bootstrap', 'Google Workspace', 'C#', 'SQL Server', 'PostgreSQL', 'Spring Boot', 'Azure DevOps', 'Metodologia Scrum'],
   },
   {
     nombre: "GameScript",
@@ -51,6 +101,7 @@ const proyectos = [
       "Habilité la interacción post-transacción mediante revisiones y preguntas sobre productos, configuré comunicaciones automáticas vía email, gestioné perfiles de usuario y realicé el despliegue completo de la aplicación.",
     ],
     imagenes: [juego, juego2, juego3, juego4, juego5, juego6, juego7, juego8, juego9, juego10],
+    tecnologias: ['React', 'Node.js', 'Material UI', 'Firebase', 'Stripe', 'Redux'],
   },
   {
     nombre: "FoodApp",
@@ -61,15 +112,16 @@ const proyectos = [
       "Además, ofrece una potente función de búsqueda, visualización detallada de cada plato y la capacidad de crear y guardar nuevas recetas mediante un formulario intuitivo. La persistencia de datos se logró con PostgreSQL y Sequelize.",
     ],
     imagenes: [Comida, Comida2, Comida3, Comida4, Comida5, Comida6, Comida7],
+    tecnologias: ['React', 'Node.js', 'Redux', 'PostgreSQL', 'Sequelize', 'CSS Puro', 'Node.js'],
   },
 ];
 
 export default function Proyectos() {
   const bg = useColorModeValue("white", "blackAlpha.900");
   const textColor = useColorModeValue("gray.800", "gray.100");
-  const iconColor = useColorModeValue("gray.700", "white"); // gris oscuro en modo claro, blanco en modo oscuro
-  const iconBg = useColorModeValue("gray.100", "gray.700"); // fondo claro u oscuro
-  const iconHoverBg = useColorModeValue("gray.300", "gray.600"); // hover más marcado
+  const iconColor = useColorModeValue("gray.700", "white");
+  const iconBg = useColorModeValue("gray.100", "gray.700");
+  const iconHoverBg = useColorModeValue("gray.300", "gray.600");
 
   const [index, setIndex] = useState(0);
   const MotionBox = motion(Box);
@@ -149,17 +201,36 @@ export default function Proyectos() {
             {linea}
           </Text>
         ))}
-        <Flex wrap="wrap" justify="center" mt={4} gap={4} style={{ userSelect: 'none' }}>
+
+        {/* Sección de Imágenes con Wrap */}
+        <Wrap justify="center" mt={4} spacing={4} style={{ userSelect: 'none' }}>
           {proyecto.imagenes.slice(0, 6).map((img, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ scale: 1.50 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Image src={img} alt={proyecto.nombre} boxSize="200px" objectFit="cover" borderRadius="md" />
-            </motion.div>
+            <WrapItem key={idx}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Image src={img} alt={proyecto.nombre} boxSize="200px" objectFit="cover" borderRadius="md" />
+              </motion.div>
+            </WrapItem>
           ))}
-        </Flex>
+        </Wrap>
+
+        {/* Sección de Tecnologías con Wrap */}
+        <Wrap justify="center" mt={6} spacing={2} style={{ userSelect: 'none' }}>
+          {proyecto.tecnologias.map((tech) => (
+              <Tooltip label={tech} hasArrow placement="bottom">
+            <WrapItem key={tech}>
+                {tecnologiasIcons[tech] && (
+                  <Icon as={tecnologiasIcons[tech]} boxSize={8} color={textColor} />
+                )}
+                {!tecnologiasIcons[tech] && (
+                  <Box as="span" fontSize="sm" color={textColor} borderWidth="1px" borderRadius="md" px={2} py={1}>{tech}</Box>
+                )}
+            </WrapItem>
+              </Tooltip>
+          ))}
+        </Wrap>
       </MotionBox>
     </MotionBox>
   );

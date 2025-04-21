@@ -2,10 +2,10 @@ import { Image, Heading, Box, useMediaQuery, Text, Circle } from "@chakra-ui/rea
 import perfil from "../images/CompletoSinFondo.png";
 import iconoAngular from "../images/angular.png";
 import iconoPostgres from "../images/postgres.png";
+import iconoSpring from "../images/spring.png"
 import iconoJs from "../images/js.PNG";
 import iconoNode from "../images/node.png";
 import iconoReact from "../images/react.png";
-import iconoRedux from "../images/redux.png";
 import iconoSql from "../images/sql.png";
 import { motion } from "framer-motion";
 import { useEffect } from 'react';
@@ -97,7 +97,7 @@ export default function Inicio() {
             <Image height="auto" maxWidth="8%" src={iconoJs} alt="JavaScript" draggable="false" />
             <Image height="auto" maxWidth="8%" src={iconoNode} alt="Node.js" draggable="false" />
             <Image height="auto" maxWidth="8%" src={iconoReact} alt="React" draggable="false" />
-            <Image height="auto" maxWidth="8%" src={iconoRedux} alt="Redux" draggable="false" />
+            <Image height="auto" maxWidth="8%" src={iconoSpring} alt="Spring" draggable="false" />
             <Image height="auto" maxWidth="8%" src={iconoSql} alt="SQL" draggable="false" />
           </Box>
         </Box>

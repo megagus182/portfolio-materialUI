@@ -32,8 +32,8 @@ function App() {
           <Box pt="64px"> {/* El contenido principal */}
             <Theme />
             <Home />
-            <AboutMe />
             <Projects />
+            <AboutMe />
             <ContactMe />
           </Box>
         </Layout>

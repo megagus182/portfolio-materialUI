@@ -1,8 +1,13 @@
-import { Box, Heading, Text, Image, useColorModeValue } from "@chakra-ui/react";
+import { Box, Heading, Text, Image, useColorModeValue, Tooltip, Wrap, WrapItem, Icon } from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
 import experiencia from "../images/experience.png";
+import { SiAngular, SiJavascript, SiReact, SiSpring, SiNodedotjs, SiPostgresql, SiGit, SiPostman, SiScrumalliance, SiAdobephotoshop } from 'react-icons/si';
+import { VscAzureDevops } from "react-icons/vsc";
+import { DiGitBranch, DiVisualstudio, DiMsqlServer } from "react-icons/di";
+import { TbBrandCSharp } from "react-icons/tb";
+
 
 export default function SobreMi() {
   const bg = useColorModeValue("blue.600", 'blackAlpha.900');
@@ -10,7 +15,26 @@ export default function SobreMi() {
   const MotionBox = motion(Box);
   const controls = useAnimation();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true }); 
+  const isInView = useInView(ref, { once: true });
+  const techs = [
+    { name: 'Angular', icon: SiAngular },
+    { name: 'JavaScript', icon: SiJavascript },
+    { name: 'React', icon: SiReact },
+    { name: 'Spring Boot', icon: SiSpring },
+    { name: 'Git', icon: DiGitBranch },
+    { name: 'Visual Studio', icon: DiVisualstudio },
+    { name: 'Photoshop', icon: SiAdobephotoshop },
+    { name: 'C#', icon: TbBrandCSharp },
+    { name: 'Node.js', icon: SiNodedotjs },
+    { name: 'PostgreSQL', icon: SiPostgresql },
+    { name: 'SQL Server', icon: DiMsqlServer },
+    { name: 'Azure DevOps', icon: VscAzureDevops },
+    { name: 'GIT', icon: SiGit },
+    { name: 'Postman', icon: SiPostman },
+    { name: 'Scrum', icon: SiScrumalliance },
+  ];
+
+
 
   useEffect(() => {
     if (isInView) {
@@ -29,13 +53,11 @@ export default function SobreMi() {
       transition={{ duration: 1.2 }}
       paddingY={{ base: '8', md: '16' }}
       backgroundColor={bg}
-      style={{ userSelect: 'none' }}
     >
       <Box
         maxWidth="container.xl"
         margin="0 auto"
         paddingX={{ base: '4', md: '8' }}
-        style={{ userSelect: 'none' }}
       >
         <Heading
           as="h2"
@@ -55,7 +77,6 @@ export default function SobreMi() {
           flexDirection={{ base: 'column', md: 'row' }}
           alignItems={{ md: 'center' }}
           gap={{ base: '8', md: '16' }}
-          style={{ userSelect: 'none' }}
         >
           {/* IZQUIERDA - Imagen */}
           <Box
@@ -77,28 +98,33 @@ export default function SobreMi() {
             flex="1"
             textAlign={{ base: 'left', md: 'justify' }}
           >
-            <Text style={{ userSelect: 'none' }} fontSize="md" lineHeight="tall" marginBottom="4">
-              Desde muy joven me sentí atraído por la tecnología, especialmente por los videojuegos y las computadoras. Esta pasión me llevó a estudiar informática desde la secundaria, continuar una carrera técnica en preparatoria y finalmente obtener el título de Ingeniero en Sistemas.
+            <Text fontSize="md" lineHeight="tall" marginBottom="4">
+              Soy Ingeniero en Sistemas con experiencia en desarrollo Full Stack. Actualmente trabajo como programador en Coppel, donde participo en proyectos internos con metodologías ágiles.
             </Text>
             <Text fontSize="md" lineHeight="tall" marginBottom="4">
-              Aunque en un inicio trabajé en sectores como logística y transporte por motivos económicos, estas experiencias me ayudaron a desarrollar habilidades clave como el liderazgo, la comunicación y la resolución de problemas.
-            </Text>
-            <Text style={{ userSelect: 'none' }} fontSize="md" lineHeight="tall" marginBottom="4">
-              Con el tiempo, decidí retomar mi vocación y me formé en desarrollo Full Stack a través de un bootcamp intensivo, lo que me permitió actualizar mis conocimientos y fortalecer mis habilidades técnicas.
+              Mi camino en la tecnología comenzó desde la secundaria y se fortaleció con estudios técnicos y un bootcamp intensivo. También cuento con experiencia previa en sectores como logística, donde desarrollé habilidades clave como liderazgo y comunicación.
             </Text>
             <Text fontSize="md" lineHeight="tall" marginBottom="4">
-              Actualmente trabajo como programador en Coppel, participando en proyectos internos que han enriquecido mi experiencia en entornos de alto rendimiento y colaboración ágil.
+              Me considero autodidacta, comprometido y orientado al aprendizaje continuo. Mi objetivo: construir soluciones que generen un impacto real.
             </Text>
-            <Text style={{ userSelect: 'none' }} fontSize="md" lineHeight="tall">
-              Me considero una persona autodidacta, comprometida y con una fuerte orientación al aprendizaje continuo. Mi objetivo es seguir creciendo como desarrollador y aportar soluciones tecnológicas que generen un impacto real.
+            <Text fontWeight="bold" marginTop="6" marginBottom="2" textAlign="center">
+              💼 Algunas tecnologías y herramientas que manejo:
             </Text>
-            <Text style={{ userSelect: 'none' }} fontWeight="bold" marginTop="6" marginBottom="2" textAlign="center">
-              💼 Tecnologías y herramientas que manejo:
-            </Text>
-            <Text style={{ userSelect: 'none' }} fontSize="md" textAlign="center">
-              | Angular | JavaScript | React | Springboot | C# | NodeJs | SQL Server | AzureDevOps |
-              Scrum | GIT | Postman | Postgres
-            </Text>
+            <Wrap justify="center" spacing="6" mt="4">
+              {techs.map(({ name, icon: IconComp }) => (
+                <Tooltip key={name} label={name} hasArrow placement="bottom">
+                  <WrapItem>
+                    <Icon
+                      as={IconComp}
+                      boxSize={10}
+                      color="gray.600"
+                      _hover={{ color: 'blue.400', transform: 'scale(1.2)' }}
+                      transition="all 0.2s"
+                    />
+                  </WrapItem>
+                </Tooltip>
+              ))}
+            </Wrap>
           </Box>
         </Box>
       </Box>
