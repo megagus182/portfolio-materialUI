@@ -1,9 +1,7 @@
 import {
   Box,
   Heading,
-  Image,
   Button,
-  Tooltip,
   useColorModeValue,
   Flex,
   FormControl,
@@ -13,6 +11,8 @@ import {
   Textarea,
   FormHelperText,
   Stack,
+  Tooltip,
+  Image,
 } from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -49,10 +49,16 @@ export default function Contactame() {
   const buttonColor = useColorModeValue("white", "gray.800");
   const headingColor = useColorModeValue("white", "whiteAlpha.900");
 
-  const esErrorNombre = nombreTocada && entradaNombre === "";
+  const esErrorNombreCorto = nombreTocada && entradaNombre.trim().length < 4;
   const esErrorCorreoVacio = correoTocada && entradaCorreo === "";
   const esErrorCorreoInvalido = correoTocada && entradaCorreo !== "" && !isValidEmail(entradaCorreo);
-  const esErrorMensaje = mensajeTocada && entradaMensaje === "";
+  const esErrorMensajeCorto = mensajeTocada && entradaMensaje.trim().length < 10;
+
+  const botonDeshabilitado =
+    entradaNombre.trim().length < 4 ||
+    entradaCorreo.trim() === "" ||
+    !isValidEmail(entradaCorreo) ||
+    entradaMensaje.trim().length < 10;
 
   const controls = useAnimation();
   const ref = useRef(null);
@@ -69,7 +75,7 @@ export default function Contactame() {
 
   function enviarCorreo(e) {
     e.preventDefault();
-    if (!esErrorNombre && !esErrorCorreoVacio && !esErrorCorreoInvalido && !esErrorMensaje) {
+    if (!esErrorNombreCorto && !esErrorCorreoVacio && !esErrorCorreoInvalido && !esErrorMensajeCorto) {
       setCargando(true);
       emailjs
         .sendForm("service_kgwu2uc", "template_i0822lk", formulario.current, "xSRbX8a-Xu0ZzjQ5h")
@@ -93,6 +99,14 @@ export default function Contactame() {
           });
         })
         .finally(() => setCargando(false));
+    } else {
+      notificacion({
+        title: "Por favor, revisa el formulario.",
+        description: "Hay campos que necesitan tu atención.",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   }
 
@@ -138,7 +152,7 @@ export default function Contactame() {
       >
         <form ref={formulario} onSubmit={enviarCorreo}>
           <Stack spacing={5}>
-            <FormControl isInvalid={esErrorNombre}>
+            <FormControl isInvalid={esErrorNombreCorto}>
               <FormLabel style={{ userSelect: 'none' }}>Nombre</FormLabel>
               <Input
                 name="from_name"
@@ -148,9 +162,10 @@ export default function Contactame() {
                 placeholder="Tu nombre"
                 bg="whiteAlpha.300"
                 color="black"
+                aria-describedby="nombre-helper-text"
               />
-              {esErrorNombre && (
-                <FormHelperText color={errorColor}>El nombre es requerido.</FormHelperText>
+              {esErrorNombreCorto && (
+                <FormHelperText color={errorColor} id="nombre-helper-text">El nombre debe tener al menos 4 letras.</FormHelperText>
               )}
             </FormControl>
 
@@ -165,16 +180,17 @@ export default function Contactame() {
                 placeholder="tu@email.com"
                 bg="whiteAlpha.300"
                 color="black"
+                aria-describedby="email-helper-text"
               />
               {esErrorCorreoVacio && (
-                <FormHelperText color={errorColor}>El correo es requerido.</FormHelperText>
+                <FormHelperText color={errorColor} id="email-helper-text">El correo es requerido.</FormHelperText>
               )}
               {esErrorCorreoInvalido && (
-                <FormHelperText color={errorColor}>El correo no es válido.</FormHelperText>
+                <FormHelperText color={errorColor} id="email-helper-text">El correo no es válido.</FormHelperText>
               )}
             </FormControl>
 
-            <FormControl isInvalid={esErrorMensaje}>
+            <FormControl isInvalid={esErrorMensajeCorto}>
               <FormLabel style={{ userSelect: 'none' }}>Mensaje</FormLabel>
               <Textarea
                 name="message"
@@ -184,21 +200,22 @@ export default function Contactame() {
                 placeholder="¿Qué te gustaría decirme?"
                 bg="whiteAlpha.300"
                 color="black"
+                aria-describedby="mensaje-helper-text"
               />
-              {esErrorMensaje && (
-                <FormHelperText color={errorColor}>El mensaje no puede estar vacío.</FormHelperText>
+              {esErrorMensajeCorto && (
+                <FormHelperText color={errorColor} id="mensaje-helper-text">El mensaje debe tener al menos 10 caracteres.</FormHelperText>
               )}
             </FormControl>
 
             <Button
               type="submit"
+              colorScheme="teal"
               bg={buttonBg}
               color={buttonColor}
               isLoading={cargando}
-              loadingText="Enviando"
-              _hover={{ bg: "teal.600" }}
+              isDisabled={botonDeshabilitado}
             >
-              Enviar
+              Enviar mensaje
             </Button>
           </Stack>
         </form>

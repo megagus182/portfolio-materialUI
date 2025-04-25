@@ -1,40 +1,70 @@
-import { Box, Heading, Text, Image, useColorModeValue, Tooltip, Wrap, WrapItem, Icon } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Image,
+  useColorModeValue,
+  Tooltip,
+  Wrap,
+  WrapItem,
+  Icon,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
 import experiencia from "../images/experience.png";
-import { SiAngular, SiJavascript, SiReact, SiSpring, SiNodedotjs, SiPostgresql, SiGit, SiPostman, SiScrumalliance, SiAdobephotoshop } from 'react-icons/si';
+import {
+  SiAngular,
+  SiJavascript,
+  SiReact,
+  SiSpring,
+  SiNodedotjs,
+  SiPostgresql,
+  SiGit,
+  SiPostman,
+  SiScrumalliance,
+  SiAdobephotoshop,
+} from "react-icons/si";
 import { VscAzureDevops } from "react-icons/vsc";
 import { DiGitBranch, DiVisualstudio, DiMsqlServer } from "react-icons/di";
 import { TbBrandCSharp } from "react-icons/tb";
-
+import React, { useState, useEffect, useRef } from "react"; // Añade React aquí
 
 export default function SobreMi() {
-  const bg = useColorModeValue("blue.600", 'blackAlpha.900');
+  const bg = useColorModeValue("blue.600", "blackAlpha.900");
   const headingColor = useColorModeValue("white", "whiteAlpha.900");
   const MotionBox = motion(Box);
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const techs = [
-    { name: 'Angular', icon: SiAngular },
-    { name: 'JavaScript', icon: SiJavascript },
-    { name: 'React', icon: SiReact },
-    { name: 'Spring Boot', icon: SiSpring },
-    { name: 'Git', icon: DiGitBranch },
-    { name: 'Visual Studio', icon: DiVisualstudio },
-    { name: 'Photoshop', icon: SiAdobephotoshop },
-    { name: 'C#', icon: TbBrandCSharp },
-    { name: 'Node.js', icon: SiNodedotjs },
-    { name: 'PostgreSQL', icon: SiPostgresql },
-    { name: 'SQL Server', icon: DiMsqlServer },
-    { name: 'Azure DevOps', icon: VscAzureDevops },
-    { name: 'GIT', icon: SiGit },
-    { name: 'Postman', icon: SiPostman },
-    { name: 'Scrum', icon: SiScrumalliance },
+  const esMovil = useBreakpointValue({ base: true, md: false }); // Detecta si es móvil
+  const [mostrarTodo, setMostrarTodo] = useState(false); // Estado para controlar la visibilidad completa
+  const numeroParrafosResumidos = 1; // Define cuántos párrafos mostrar resumidos
+  const MotionImage = motion(Image);
+
+  const textosSobreMi = [
+    "Soy Ingeniero en Sistemas con experiencia en desarrollo Full Stack. Actualmente trabajo como programador en Coppel, donde participo en proyectos internos con metodologías ágiles.",
+    "Mi camino en la tecnología comenzó desde la secundaria y se fortaleció con estudios técnicos y un bootcamp intensivo. También tengo experiencia previa en sectores como logística, donde desarrollé habilidades clave como liderazgo y comunicación.",
+    "Me considero autodidacta, comprometido y orientado al aprendizaje continuo. Mi objetivo: construir soluciones que generen un impacto real.",
   ];
 
-
+  const techs = [
+    { name: "Angular", icon: SiAngular },
+    { name: "JavaScript", icon: SiJavascript },
+    { name: "React", icon: SiReact },
+    { name: "Spring Boot", icon: SiSpring },
+    { name: "Git", icon: DiGitBranch },
+    { name: "Visual Studio", icon: DiVisualstudio },
+    { name: "Photoshop", icon: SiAdobephotoshop },
+    { name: "C#", icon: TbBrandCSharp },
+    { name: "Node.js", icon: SiNodedotjs },
+    { name: "PostgreSQL", icon: SiPostgresql },
+    { name: "SQL Server", icon: DiMsqlServer },
+    { name: "Azure DevOps", icon: VscAzureDevops },
+    { name: "GIT", icon: SiGit },
+    { name: "Postman", icon: SiPostman },
+    { name: "Scrum", icon: SiScrumalliance },
+  ];
 
   useEffect(() => {
     if (isInView) {
@@ -51,13 +81,13 @@ export default function SobreMi() {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2 }}
-      paddingY={{ base: '8', md: '16' }}
+      paddingY={{ base: "8", md: "16" }}
       backgroundColor={bg}
     >
       <Box
         maxWidth="container.xl"
         margin="0 auto"
-        paddingX={{ base: '4', md: '8' }}
+        paddingX={{ base: "4", md: "8" }}
       >
         <Heading
           as="h2"
@@ -66,48 +96,77 @@ export default function SobreMi() {
           marginBottom="8"
           fontWeight="light"
           color={headingColor}
-          style={{ userSelect: 'none' }}
+          style={{ userSelect: "none" }}
         >
-          <Heading style={{ userSelect: 'none' }} textAlign="center" mb={10} color={headingColor}>
+          <Heading
+            style={{ userSelect: "none" }}
+            textAlign="center"
+            mb={10}
+            color={headingColor}
+          >
             Sobre Mí
           </Heading>
         </Heading>
         <Box
           display="flex"
-          flexDirection={{ base: 'column', md: 'row' }}
-          alignItems={{ md: 'center' }}
-          gap={{ base: '8', md: '16' }}
+          flexDirection={{ base: "column", md: "row" }}
+          alignItems={{ md: "center" }}
+          gap={{ base: "8", md: "16" }}
         >
           {/* IZQUIERDA - Imagen */}
-          <Box
-            flex="1"
-            display="flex"
-            justifyContent="center"
-          >
-            <Image
+          <Box flex="1" display="flex" justifyContent="center">
+            <MotionImage
               src={experiencia}
-              alt="Experiencia profesional"
-              maxWidth={{ base: '80%', md: '400px' }}
-              borderRadius="md"
-              boxShadow="md"
+              alt="Imagen sobre mí"
+              borderRadius="lg"
+              maxW={{ base: "200px", md: "300px", lg: "400px" }}
+              animate={{
+                y: [0, -5, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                repeatType: "loop",
+                ease: "easeInOut",
+              }}
             />
           </Box>
 
           {/* DERECHA - Texto */}
-          <Box
-            flex="1"
-            textAlign={{ base: 'left', md: 'justify' }}
-          >
-            <Text fontSize="md" lineHeight="tall" marginBottom="4">
-              Soy Ingeniero en Sistemas con experiencia en desarrollo Full Stack. Actualmente trabajo como programador en Coppel, donde participo en proyectos internos con metodologías ágiles.
-            </Text>
-            <Text fontSize="md" lineHeight="tall" marginBottom="4">
-              Mi camino en la tecnología comenzó desde la secundaria y se fortaleció con estudios técnicos y un bootcamp intensivo. También cuento con experiencia previa en sectores como logística, donde desarrollé habilidades clave como liderazgo y comunicación.
-            </Text>
-            <Text fontSize="md" lineHeight="tall" marginBottom="4">
-              Me considero autodidacta, comprometido y orientado al aprendizaje continuo. Mi objetivo: construir soluciones que generen un impacto real.
-            </Text>
-            <Text fontWeight="bold" marginTop="6" marginBottom="2" textAlign="center">
+          <Box flex="1" textAlign={{ base: "left", md: "justify" }}>
+            {textosSobreMi.map((texto, index) => (
+              <React.Fragment key={index}>
+                {esMovil &&
+                !mostrarTodo &&
+                index >= numeroParrafosResumidos ? null : (
+                  <Text fontSize="md" lineHeight="tall" marginBottom="4">
+                    {texto}
+                  </Text>
+                )}
+              </React.Fragment>
+            ))}
+
+            {esMovil && textosSobreMi.length > numeroParrafosResumidos && (
+              <Text
+                as="button"
+                onClick={() => setMostrarTodo(!mostrarTodo)}
+                color="teal.400"
+                mt={2}
+                _hover={{ textDecoration: "underline" }}
+                textAlign="center"
+                width="100%"
+                display="block"
+              >
+                {mostrarTodo ? "Ver menos" : "Ver más"}
+              </Text>
+            )}
+
+            <Text
+              fontWeight="bold"
+              marginTop="6"
+              marginBottom="2"
+              textAlign="center"
+            >
               💼 Algunas tecnologías y herramientas que manejo:
             </Text>
             <Wrap justify="center" spacing="6" mt="4">
@@ -118,7 +177,7 @@ export default function SobreMi() {
                       as={IconComp}
                       boxSize={10}
                       color="gray.600"
-                      _hover={{ color: 'blue.400', transform: 'scale(1.2)' }}
+                      _hover={{ color: "blue.400", transform: "scale(1.2)" }}
                       transition="all 0.2s"
                     />
                   </WrapItem>
