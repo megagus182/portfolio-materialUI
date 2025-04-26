@@ -89,15 +89,6 @@ export default function SobreMi() {
         margin="0 auto"
         paddingX={{ base: "4", md: "8" }}
       >
-        <Heading
-          as="h2"
-          size="2xl"
-          textAlign="center"
-          marginBottom="8"
-          fontWeight="light"
-          color={headingColor}
-          style={{ userSelect: "none" }}
-        >
           <Heading
             style={{ userSelect: "none" }}
             textAlign="center"
@@ -106,7 +97,6 @@ export default function SobreMi() {
           >
             Sobre Mí
           </Heading>
-        </Heading>
         <Box
           display="flex"
           flexDirection={{ base: "column", md: "row" }}

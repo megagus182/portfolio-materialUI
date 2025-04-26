@@ -10,7 +10,11 @@ import {
   Icon,
   Wrap,
   useBreakpointValue,
-  WrapItem,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
 } from "@chakra-ui/react";
 import {
   SiAngular,
@@ -48,6 +52,21 @@ import juego7 from "../images/Game7.PNG";
 import juego8 from "../images/Game8.PNG";
 import juego9 from "../images/Game9.PNG";
 import juego10 from "../images/Game10.PNG";
+import juegoFull1 from "../images/Game1_full.PNG";
+import juegoFull2 from "../images/Game2_full.PNG";
+import juegoFull3 from "../images/Game3_full.PNG";
+import juegoFull4 from "../images/Game4_full.PNG";
+import juegoFull5 from "../images/Game5_full.PNG";
+import juegoFull6 from "../images/Game6_full.PNG";
+import juegoFull7 from "../images/Game7_full.PNG";
+import juegoFull8 from "../images/Game8_full.PNG";
+import juegoFull9 from "../images/Game9_full.PNG";
+import comidaFull1 from "../images/Food1_full.PNG";
+import comidaFull2 from "../images/Food2_full.PNG";
+import comidaFull3 from "../images/Food3_full.PNG";
+import comidaFull4 from "../images/Food4_full.PNG";
+import comidaFull5 from "../images/Food5_full.PNG";
+import comidaFull6 from "../images/Food6_full.PNG";
 import React, { useState } from "react";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
@@ -109,6 +128,7 @@ const proyectos = [
       "Azure DevOps",
       "Metodologia Scrum",
     ],
+    imagenesOriginales: [Coppel],
   },
   {
     nombre: "GameScript",
@@ -138,6 +158,17 @@ const proyectos = [
       "Stripe",
       "Redux",
     ],
+    imagenesOriginales: [
+      juegoFull1,
+      juegoFull2,
+      juegoFull3,
+      juegoFull4,
+      juegoFull5,
+      juegoFull6,
+      juegoFull7,
+      juegoFull8,
+      juegoFull9,
+    ],
   },
   {
     nombre: "FoodApp",
@@ -156,6 +187,14 @@ const proyectos = [
       "Sequelize",
       "CSS Puro",
       "Node.js",
+    ],
+    imagenesOriginales: [
+      comidaFull1,
+      comidaFull2,
+      comidaFull3,
+      comidaFull4,
+      comidaFull5,
+      comidaFull6,
     ],
   },
 ];
@@ -178,12 +217,38 @@ export default function Proyectos() {
     setIndex((prev) => (prev - 1 + proyectos.length) % proyectos.length);
 
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: handleNext, // Cambiar a siguiente proyecto al deslizar 
-    onSwipedRight: handlePrev, 
-    preventDefaultTouchmoveEvent: true, // Evitar que los eventos predeterminados interrumpan 
-    trackMouse: true, 
+    onSwipedLeft: handleNext, // Cambiar a siguiente proyecto al deslizar
+    onSwipedRight: handlePrev,
+    preventDefaultTouchmoveEvent: true, // Evitar que los eventos predeterminados interrumpan
+    trackMouse: true,
   });
   const proyecto = proyectos[index];
+  const [isCarouselOpen, setIsCarouselOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const nextCarouselImage = () => {
+    setSelectedImageIndex(
+      (prevIndex) => (prevIndex + 1) % proyecto.imagenesOriginales.length
+    );
+  };
+
+  const prevCarouselImage = () => {
+    setSelectedImageIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + proyecto.imagenesOriginales.length) %
+        proyecto.imagenesOriginales.length
+    );
+  };
+
+  const openCarousel = (imageIndex) => {
+    setSelectedImageIndex(imageIndex);
+    setIsCarouselOpen(true);
+  };
+
+  const closeCarousel = () => {
+    setIsCarouselOpen(false);
+    setSelectedImageIndex(0);
+  };
 
   useEffect(() => {
     if (isInView) {
@@ -211,7 +276,7 @@ export default function Proyectos() {
       py={10}
       px={5}
       bg={bg}
-      {...swipeHandlers} // Aplicamos deslizamiento 
+      {...swipeHandlers} // Aplicamos deslizamiento
     >
       <Heading
         mb={6}
@@ -275,15 +340,15 @@ export default function Proyectos() {
         {esMovil && (
           <Box
             position="absolute"
-            top="50%" 
-            left="10px" 
+            top="50%"
+            left="10px"
             transform="translateY(-50%)"
             color="white"
             fontSize="2xl"
             _hover={{ cursor: "pointer" }}
           >
             <motion.div
-              animate={{ x: [0, 10, 0] }} 
+              animate={{ x: [0, 10, 0] }}
               transition={{ repeat: Infinity, duration: 1 }}
             >
               <Icon
@@ -300,9 +365,9 @@ export default function Proyectos() {
         {esMovil && (
           <Box
             position="absolute"
-            top="50%" 
-            right="10px" 
-            transform="translateY(-50%)" 
+            top="50%"
+            right="10px"
+            transform="translateY(-50%)"
             color="white"
             fontSize="2xl"
             _hover={{ cursor: "pointer" }}
@@ -343,27 +408,24 @@ export default function Proyectos() {
 
         {/* Sección de Imágenes con Wrap */}
         <Wrap
-          justify="center"
+          justify="center" // Asegúrate de tener esto
           mt={4}
           spacing={4}
           style={{ userSelect: "none" }}
           shouldWrapChildren
         >
           {proyecto.imagenes.slice(0, 6).map((img, idx) => (
-            <WrapItem key={idx}>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+            <Box key={img} cursor="pointer" onClick={() => openCarousel(idx)}>
+              <motion.div>
                 <Image
                   src={img}
                   alt={proyecto.nombre}
-                  boxSize={{ base: "130px", sm: "180px", md: "200px" }} // Ajuste por tamaño de pantalla
+                  boxSize={{ base: "130px", sm: "180px", md: "200px" }}
                   objectFit="cover"
                   borderRadius="md"
                 />
               </motion.div>
-            </WrapItem>
+            </Box>
           ))}
         </Wrap>
 
@@ -375,8 +437,8 @@ export default function Proyectos() {
           style={{ userSelect: "none" }}
         >
           {proyecto.tecnologias.map((tech) => (
-            <Tooltip label={tech} hasArrow placement="bottom">
-              <WrapItem key={tech}>
+            <Tooltip key={tech} label={tech} hasArrow placement="bottom">
+              <Box as="div">
                 {tecnologiasIcons[tech] && (
                   <Icon
                     as={tecnologiasIcons[tech]}
@@ -397,11 +459,80 @@ export default function Proyectos() {
                     {tech}
                   </Box>
                 )}
-              </WrapItem>
+              </Box>
             </Tooltip>
           ))}
         </Wrap>
       </MotionBox>
+      <Modal
+        isOpen={isCarouselOpen}
+        onClose={closeCarousel}
+        size={{ base: "90%", md: "80vw", lg: "70vw" }}
+      >
+        <ModalOverlay />
+        <ModalContent padding={0}>
+          <ModalCloseButton />
+          {useBreakpointValue({
+            base: null,
+            md: (
+              <IconButton
+                icon={<ArrowLeftIcon color="green.500" />} // Cambiamos el color a verde
+                onClick={prevCarouselImage}
+                aria-label="Imagen anterior"
+                position="absolute"
+                left={4} // Mantenemos un pequeño margen izquierdo
+                top="50%"
+                transform="translateY(-50%)"
+                zIndex={10}
+                bg="transparent" // Fondo transparente para que no opaque la imagen
+                _hover={{ bg: "gray.200" }} // Un ligero feedback al pasar el ratón
+                size="lg" // Ajustamos el tamaño si es necesario
+              />
+            ),
+          })}
+          <ModalBody
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            {...useSwipeable({
+              onSwipedLeft: nextCarouselImage,
+              onSwipedRight: prevCarouselImage,
+              preventDefaultTouchmoveEvent: true,
+              trackMouse: true,
+            })}
+            style={{ cursor: "grab" }}
+          >
+            {proyecto.imagenesOriginales &&
+              proyecto.imagenesOriginales[selectedImageIndex] && (
+                <Image
+                  src={proyecto.imagenesOriginales[selectedImageIndex]}
+                  alt={`Imagen completa del proyecto ${selectedImageIndex + 1}`}
+                  maxW="90vw"
+                  maxH="90vh"
+                  style={{ userSelect: "none" }}
+                />
+              )}
+          </ModalBody>
+          {useBreakpointValue({
+            base: null,
+            md: (
+              <IconButton
+                icon={<ArrowRightIcon color="green.500" />}
+                onClick={nextCarouselImage}
+                aria-label="Siguiente imagen"
+                position="absolute"
+                right={0}
+                top="50%"
+                transform="translateY(-50%)"
+                zIndex={10}
+                bg="transparent"
+                _hover={{ bg: "gray.200" }}
+                size="md"
+              />
+            ),
+          })}
+        </ModalContent>
+      </Modal>
     </MotionBox>
   );
 }
