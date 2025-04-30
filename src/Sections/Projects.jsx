@@ -42,6 +42,11 @@ import Comida4 from "../images/Food4.PNG";
 import Comida5 from "../images/Food5.PNG";
 import Comida6 from "../images/Food6.PNG";
 import Comida7 from "../images/Food7.PNG";
+import Artgiss from "../images/Artgiss1.PNG";
+import Artgiss2 from "../images/Artgiss2.PNG";
+import Artgiss3 from "../images/Artgiss3.PNG";
+import Artgiss4 from "../images/Artgiss4.PNG";
+import Artgiss5 from "../images/Artgiss5.PNG";
 import juego from "../images/Game1.PNG";
 import juego2 from "../images/Game2.PNG";
 import juego3 from "../images/Game3.PNG";
@@ -131,6 +136,22 @@ const proyectos = [
     imagenesOriginales: [Coppel],
   },
   {
+    nombre: "ArtGiss",
+    descripcion: [
+      "Este portafolio web fue desarrollado utilizando React y la librería de componentes Material-UI, buscando ofrecer una experiencia de usuario fluida y atractiva.",
+      "La galería de obras se presenta de forma dinámica y responsiva, con una opción de lightbox para apreciar cada detalle.", 
+      "La sección de contacto incluye validaciones de formulario para asegurar una comunicación efectiva, y la navegación intuitiva permite a los visitantes explorar fácilmente las diferentes facetas de mi trabajo artístico y mis perfiles en redes sociales.",
+    ],
+    imagenes: [Artgiss, Artgiss2, Artgiss3, Artgiss4, Artgiss5],
+    tecnologias: [
+      "React",
+      "Node.js",
+      "Material UI",
+      "EmailJS",
+    ],
+    imagenesOriginales: [Artgiss, Artgiss2, Artgiss3, Artgiss4, Artgiss5],
+  },
+  {
     nombre: "GameScript",
     descripcion: [
       "En un proyecto académico de 3 semanas, demostré mi capacidad para trabajar en equipo bajo la metodología ágil SCRUM, investigando y aplicando nuevas tecnologías para desarrollar funcionalidades clave.",
@@ -217,9 +238,9 @@ export default function Proyectos() {
     setIndex((prev) => (prev - 1 + proyectos.length) % proyectos.length);
 
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: handleNext, // Cambiar a siguiente proyecto al deslizar
+    onSwipedLeft: handleNext, 
     onSwipedRight: handlePrev,
-    preventDefaultTouchmoveEvent: true, // Evitar que los eventos predeterminados interrumpan
+    preventDefaultTouchmoveEvent: true, 
     trackMouse: true,
   });
   const proyecto = proyectos[index];
@@ -276,7 +297,7 @@ export default function Proyectos() {
       py={10}
       px={5}
       bg={bg}
-      {...swipeHandlers} // Aplicamos deslizamiento
+      {...swipeHandlers} 
     >
       <Heading
         mb={6}
@@ -408,7 +429,7 @@ export default function Proyectos() {
 
         {/* Sección de Imágenes con Wrap */}
         <Wrap
-          justify="center" // Asegúrate de tener esto
+          justify="center" 
           mt={4}
           spacing={4}
           style={{ userSelect: "none" }}
@@ -476,17 +497,17 @@ export default function Proyectos() {
             base: null,
             md: (
               <IconButton
-                icon={<ArrowLeftIcon color="green.500" />} // Cambiamos el color a verde
+                icon={<ArrowLeftIcon color="green.500" />} 
                 onClick={prevCarouselImage}
                 aria-label="Imagen anterior"
                 position="absolute"
-                left={4} // Mantenemos un pequeño margen izquierdo
+                left={4} 
                 top="50%"
                 transform="translateY(-50%)"
                 zIndex={10}
-                bg="transparent" // Fondo transparente para que no opaque la imagen
-                _hover={{ bg: "gray.200" }} // Un ligero feedback al pasar el ratón
-                size="lg" // Ajustamos el tamaño si es necesario
+                bg="transparent" 
+                _hover={{ bg: "gray.200" }} 
+                size="lg" 
               />
             ),
           })}
