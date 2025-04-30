@@ -140,7 +140,7 @@ const proyectos = [
     descripcion: [
       "Este portafolio web fue desarrollado utilizando React y la librería de componentes Material-UI, buscando ofrecer una experiencia de usuario fluida y atractiva.",
       "La galería de obras se presenta de forma dinámica y responsiva, con una opción de lightbox para apreciar cada detalle.", 
-      "La sección de contacto incluye validaciones de formulario para asegurar una comunicación efectiva, y la navegación intuitiva permite a los visitantes explorar fácilmente las diferentes facetas de mi trabajo artístico y mis perfiles en redes sociales.",
+      "La sección de contacto incluye validaciones de formulario para asegurar una comunicación efectiva, y la navegación intuitiva permite a los visitantes explorar fácilmente las diferentes facetas del trabajo artístico y los perfiles en redes sociales.",
     ],
     imagenes: [Artgiss, Artgiss2, Artgiss3, Artgiss4, Artgiss5],
     tecnologias: [
