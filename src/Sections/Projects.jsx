@@ -115,7 +115,7 @@ const proyectos = [
   {
     nombre: "Plataformas Internas - Coppel",
     descripcion: [
-      "Actualmente colaboro como desarrollador en Coppel, participando en el mantenimiento y evolución de plataformas internas a gran escala.",
+      "En mi ultimo trabajo como desarrollador colabore en Coppel, participando en el mantenimiento y evolución de plataformas internas a gran escala.",
       "Trabajo en equipo aplicando metodologías ágiles y buenas prácticas de desarrollo para asegurar la calidad y eficiencia del código.",
       "Entre mis responsabilidades están la implementación de nuevas funcionalidades, corrección de bugs y mejoras en la experiencia de usuario.",
       "Por temas de confidencialidad no puedo mostrar imágenes de los proyectos, pero ha sido una experiencia clave en mi crecimiento profesional.",
