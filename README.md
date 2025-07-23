@@ -20,7 +20,7 @@ Soy Gustavo Castillo, un desarrollador web apasionado por crear soluciones robus
 * **Correo Electrónico:** megagus182@hotmail.com
 * **LinkedIn:** (www.linkedin.com/in/gacr1990)
 * **GitHub:** (https://github.com/megagus182)
-* **Currículum:** (https://drive.google.com/file/d/1kxpDfRlRijc-CrzFBDapLT2yi-iZtUu3/view?usp=sharing)
+* **Currículum:** (https://drive.google.com/file/d/1FQSm14Qn7XWoZlvdIc6LYMldXUaDPgO9/view?usp=sharing)
 
 ## Tecnologías Utilizadas en este Portafolio
 

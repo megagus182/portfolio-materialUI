@@ -25,7 +25,7 @@ const scrollToSection = (id) => {
 const Links = [
     { name: "Inicio", id: "inicio" },
     { name: "Proyectos", id: "proyectos" },
-    { name: "Sobre mí", id: "sobremi" },
+    { name: "Skills", id: "skills" },
     { name: "Contacto", id: "contacto" },
 ];
 
