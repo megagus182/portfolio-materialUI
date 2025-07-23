@@ -18,7 +18,8 @@ import {
   Heading,
   Text,
   Flex, // Importar Flex para el contenedor de 50/50
-  Spinner, // Para el fallback del Canvas
+  Spinner,
+  useBreakpointValue  // Para el fallback del Canvas
 } from "@chakra-ui/react";
 
 // Importar los íconos de forma más limpia
@@ -158,6 +159,8 @@ function Key({ icon: IconComponent, position, color, onClick, rotation }) {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
   useCursor(hovered); // Cambia el cursor a pointer al hacer hover
+  const iconSize = useBreakpointValue({ base: 32, md: 56 }); // ícono más pequeño en móvil
+  const containerWidth = useBreakpointValue({ base: "32px", md: "56px" });
 
   // Animación de la tecla al presionar
   const { y } = useSpring({
@@ -194,8 +197,8 @@ function Key({ icon: IconComponent, position, color, onClick, rotation }) {
         center
         position={[0, 0.85, 0]}
         style={{
-          width: "56px",
-          height: "56px",
+    width: containerWidth,
+    height: containerWidth,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -204,7 +207,7 @@ function Key({ icon: IconComponent, position, color, onClick, rotation }) {
           color: hovered ? "#ccc" : "white", // Color del ícono al hacer hover
         }}
       >
-        {IconComponent && <IconComponent size={56} />}
+        {IconComponent && <IconComponent size={iconSize} />}
       </Html>
     </group>
   );
@@ -223,6 +226,8 @@ function SpaceBar({
   const [pressed, setPressed] = useState(false);
   const shapeRef = useRef();
   useCursor(hovered); // Cambia el cursor a pointer al hacer hover
+  const iconSize = useBreakpointValue({ base: 32, md: 56 }); // ícono más pequeño en móvil
+const containerWidth = useBreakpointValue({ base: "32px", md: "56px" });
 
   // Define la geometría de la barra espaciadora
   useEffect(() => {
@@ -297,8 +302,9 @@ function SpaceBar({
         center
         position={[0, 0.85, 0]}
         style={{
-          width: `${56 + width * 5}px`, // Ajusta el ancho del contenedor HTML
-          height: "56px",
+          
+    width: containerWidth,
+    height: containerWidth,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -307,7 +313,7 @@ function SpaceBar({
           color: hovered ? "#ccc" : "white",
         }}
       >
-        {IconComponent && <IconComponent size={56} />}
+        {IconComponent && <IconComponent size={iconSize} />}
       </Html>
     </group>
   );
@@ -322,8 +328,7 @@ function Tecnologias3D() {
   const row3 = techs.slice(6, 11);
   const row4 = techs.slice(11, 14);
   const { colorMode } = useColorMode();
-
-
+const isMobile = useBreakpointValue({ base: true, md: false });
 
   const textColor = useColorModeValue("#111", "#f0f0f0"); // Texto principal
 
@@ -372,7 +377,7 @@ function Tecnologias3D() {
           flex="1" // Ocupa 50% del espacio disponible
           width={{ base: "100%", md: "50%" }} // Explícitamente 100% en móvil, 50% en escritorio
           height={{ base: "50vh", md: "auto" }} // Altura fija en móvil (vh), auto en escritorio para flex
-          minHeight="300px" // Altura mínima para asegurar visibilidad
+          minHeight="200px" // Altura mínima para asegurar visibilidad
           mb={{ base: 8, md: 0 }} // Margen inferior en móvil, ninguno en escritorio
           position="relative" // Para posicionar el spinner de carga
         >
@@ -433,7 +438,7 @@ function Tecnologias3D() {
                 )}
               </group>
               <ContactShadows position={[0, -0.05, 0]} opacity={0.5} scale={20} blur={2} far={10} />
-              <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 2.1} />
+              <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 2.1} enableRotate={!isMobile} />
             </Canvas>
           </Suspense>
         </Box>

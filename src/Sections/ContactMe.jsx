@@ -289,6 +289,7 @@ export default function Contactame() {
           alignItems="center" // Centrar los íconos horizontalmente
           justifyContent="center" // Centrar verticalmente en la columna
           p={{ base: 6, md: 8 }} // Padding responsivo
+          minW={{ base: "100%", md: "400px" }} // Ancho mínimo para el formulario en escritorio
           bg={formBg} // Fondo similar al formulario para coherencia
           borderRadius="lg"
           boxShadow="xl"
