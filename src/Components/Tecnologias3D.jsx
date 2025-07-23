@@ -323,11 +323,7 @@ function Tecnologias3D() {
   const row4 = techs.slice(11, 14);
   const { colorMode } = useColorMode();
 
-  // Colores dinámicos basados en el modo de color
-  const backgroundColor = useColorModeValue(
-    "rgba(248, 248, 248, 0.7)", // Tema claro: blanco suave semitransparente
-    "rgba(15, 15, 15, 0.7)" // Tema oscuro: casi negro semitransparente
-  );
+
 
   const textColor = useColorModeValue("#111", "#f0f0f0"); // Texto principal
 

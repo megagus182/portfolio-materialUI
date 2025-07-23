@@ -10,7 +10,6 @@ import {
   useToast,
   Input,
   Textarea,
-  FormHelperText, // Se mantiene para hints, pero usaremos FormErrorMessage para errores
   FormErrorMessage, // Importar para mensajes de error explícitos
   Stack,
   Tooltip,
@@ -74,7 +73,6 @@ export default function Contactame() {
   // Colores dinámicos basados en el tema
   const formBg = useColorModeValue("white", "gray.800");
   const formTextColor = useColorModeValue("gray.800", "whiteAlpha.900");
-  const errorColor = useColorModeValue("red.500", "red.400");
   const headingColor = useColorModeValue("gray.900", "whiteAlpha.900");
   // Fondo exterior semitransparente para ver las partículas
   const outerBg = useColorModeValue("rgba(248, 248, 248, 0.72)", "rgba(15, 15, 15, 0.76)");
