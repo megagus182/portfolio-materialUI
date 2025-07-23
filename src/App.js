@@ -33,6 +33,7 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
+        <Box overflowX="hidden"> {/* ⬅️ Agrega este contenedor aquí */}
         <Navbar style={{ zIndex: 1 }} /> 
         <Layout>
           <Box pt="64px">
@@ -42,6 +43,7 @@ function App() {
             <ContactMe />
           </Box>
         </Layout>
+        </Box>
       </BrowserRouter>
     </ChakraProvider>
   );
