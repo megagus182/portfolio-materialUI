@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
