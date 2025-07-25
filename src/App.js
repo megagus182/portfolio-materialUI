@@ -6,6 +6,7 @@ import ContactMe from "./Sections/ContactMe";
 import Navbar from './Components/Navbar';
 import Layout from './Components/ParticlesBackground'
 import Tecnologias3D from './Components/Tecnologias3D';
+import './App.css'
 
 const colors = {
   brand: {
