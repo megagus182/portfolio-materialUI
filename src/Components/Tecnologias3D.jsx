@@ -19,7 +19,7 @@ import {
   Text,
   Flex, // Importar Flex para el contenedor de 50/50
   Spinner,
-  useBreakpointValue  // Para el fallback del Canvas
+  useBreakpointValue, // Para el fallback del Canvas
 } from "@chakra-ui/react";
 
 // Importar los íconos de forma más limpia
@@ -197,8 +197,8 @@ function Key({ icon: IconComponent, position, color, onClick, rotation }) {
         center
         position={[0, 0.85, 0]}
         style={{
-    width: containerWidth,
-    height: containerWidth,
+          width: containerWidth,
+          height: containerWidth,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -227,7 +227,7 @@ function SpaceBar({
   const shapeRef = useRef();
   useCursor(hovered); // Cambia el cursor a pointer al hacer hover
   const iconSize = useBreakpointValue({ base: 32, md: 56 }); // ícono más pequeño en móvil
-const containerWidth = useBreakpointValue({ base: "32px", md: "56px" });
+  const containerWidth = useBreakpointValue({ base: "32px", md: "56px" });
 
   // Define la geometría de la barra espaciadora
   useEffect(() => {
@@ -302,9 +302,8 @@ const containerWidth = useBreakpointValue({ base: "32px", md: "56px" });
         center
         position={[0, 0.85, 0]}
         style={{
-          
-    width: containerWidth,
-    height: containerWidth,
+          width: containerWidth,
+          height: containerWidth,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -328,13 +327,15 @@ function Tecnologias3D() {
   const row3 = techs.slice(6, 11);
   const row4 = techs.slice(11, 14);
   const { colorMode } = useColorMode();
-const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const textColor = useColorModeValue("#111", "#f0f0f0"); // Texto principal
 
   // Colores de la tarjeta de descripción
   const cardBg =
-    colorMode === "dark" ? "rgba(255, 255, 255, 0.08)" : "rgba(255, 255, 255, 1)";
+    colorMode === "dark"
+      ? "rgba(255, 255, 255, 0.08)"
+      : "rgba(255, 255, 255, 1)";
   const cardBorder =
     colorMode === "dark" ? "rgba(255, 255, 255, 0.15)" : "rgba(0, 0, 0, 0.1)";
   const cardText = colorMode === "dark" ? "#fff" : "#222";
@@ -356,11 +357,17 @@ const isMobile = useBreakpointValue({ base: true, md: false });
     >
       {/* Título y subtítulo de la sección */}
       <Box textAlign="center" mb={8}>
-        <Heading as="h2" fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold" textColor={textColor}>
+        <Heading
+          as="h2"
+          fontSize={{ base: "2xl", md: "3xl" }}
+          fontWeight="bold"
+          textColor={textColor}
+        >
           🛠 Tecnologías que uso
         </Heading>
         <Text fontSize={{ base: "md", md: "lg" }} color="gray.500">
-          Soy desarrollador Full Stack con enfoque en tecnologías modernas y metodologías ágiles.
+          Soy desarrollador Full Stack con enfoque en tecnologías modernas y
+          metodologías ágiles.
         </Text>
       </Box>
 
@@ -392,10 +399,17 @@ const isMobile = useBreakpointValue({ base: true, md: false });
                 bottom="0"
                 justifyContent="center"
                 alignItems="center"
-                bg={colorMode === "dark" ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.5)"}
+                bg={
+                  colorMode === "dark"
+                    ? "rgba(0,0,0,0.5)"
+                    : "rgba(255,255,255,0.5)"
+                }
                 borderRadius="md"
               >
-                <Spinner size="xl" color={colorMode === "dark" ? "blue.300" : "blue.500"} />
+                <Spinner
+                  size="xl"
+                  color={colorMode === "dark" ? "blue.300" : "blue.500"}
+                />
               </Flex>
             }
           >
@@ -418,7 +432,14 @@ const isMobile = useBreakpointValue({ base: true, md: false });
                   row.map((tech, j) => {
                     // Posicionamiento de las teclas en el espacio 3D
                     const z = -5.3 + i * 1.5;
-                    const x = i === 3 ? (j === 1 ? -1 : j === 0 ? -4 : 2) : -4 + j * 1.5;
+                    const x =
+                      i === 3
+                        ? j === 1
+                          ? -1
+                          : j === 0
+                          ? -4
+                          : 2
+                        : -4 + j * 1.5;
                     const rotation = [0.2 - i * 0.05, 0, 0];
                     const isSpace = i === 3 && j === 1; // Identifica la barra espaciadora
                     const KeyComponent = isSpace ? SpaceBar : Key; // Elige el componente de tecla
@@ -430,15 +451,31 @@ const isMobile = useBreakpointValue({ base: true, md: false });
                         position={[x, 0, z]}
                         rotation={rotation}
                         color={techColors[tech.name]}
-                        onClick={() => setSelectedTech(tech)} 
-                        width={isSpace ? 5 : undefined} 
+                        onClick={() => setSelectedTech(tech)}
+                        width={isSpace ? 5 : undefined}
+                        sx={{
+                          WebkitTapHighlightColor: "transparent",
+                          WebkitTouchCallout: "none",
+                          userSelect: "none",
+                        }}
                       />
                     );
                   })
                 )}
               </group>
-              <ContactShadows position={[0, -0.05, 0]} opacity={0.5} scale={20} blur={2} far={10} />
-              <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 2.1} enableRotate={!isMobile} />
+              <ContactShadows
+                position={[0, -0.05, 0]}
+                opacity={0.5}
+                scale={20}
+                blur={2}
+                far={10}
+              />
+              <OrbitControls
+                enableZoom={false}
+                enablePan={false}
+                maxPolarAngle={Math.PI / 2.1}
+                enableRotate={!isMobile}
+              />
             </Canvas>
           </Suspense>
         </Box>
@@ -447,9 +484,9 @@ const isMobile = useBreakpointValue({ base: true, md: false });
         <Flex
           flex="1" // Ocupa 50% del espacio disponible
           width={{ base: "100%", md: "50%" }} // Explícitamente 100% en móvil, 50% en escritorio
-          justifyContent="center" 
-          alignItems="center" 
-          minHeight={{ base: "200px", md: "300px" }} 
+          justifyContent="center"
+          alignItems="center"
+          minHeight={{ base: "200px", md: "300px" }}
         >
           {selectedTech ? (
             <motion.div
@@ -471,7 +508,7 @@ const isMobile = useBreakpointValue({ base: true, md: false });
                 alignItems: "center",
                 textAlign: "center",
                 maxWidth: "100%",
-                width: "100%", 
+                width: "100%",
               }}
             >
               {/* Ícono de la tecnología seleccionada */}
@@ -489,7 +526,12 @@ const isMobile = useBreakpointValue({ base: true, md: false });
                 {`${selectedTech.description}`}
               </Text>
               {/* Botón para cerrar la descripción */}
-              <Button size="sm" mt="4" colorScheme="green" onClick={() => setSelectedTech(null)}>
+              <Button
+                size="sm"
+                mt="4"
+                colorScheme="green"
+                onClick={() => setSelectedTech(null)}
+              >
                 Cerrar
               </Button>
             </motion.div>
